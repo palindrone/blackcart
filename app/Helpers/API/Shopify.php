@@ -69,7 +69,8 @@ class Shopify implements ChannelAPIInterface {
                     "value" => $variant->weight,
                     "unit" => $variant->weight_unit
                 ],
-                "inventory" => $variant->inventory_quantity
+                "inventory" => $variant->inventory_quantity,
+                "inventory_status" => $variant->inventory_quantity > 0 ? "instock" : "outofstock"
             ];
 
             // Shopify only allows 3 options
@@ -95,7 +96,7 @@ class Shopify implements ChannelAPIInterface {
             "prices" => array_unique($prices, SORT_REGULAR),
             "price_range" => implode(" - ", $this->getPricesRange($prices)),
             "inventory_total" => $inventoryTotal,
-            "inventory_status" => $inventoryTotal > 0,
+            "inventory_status" => $inventoryTotal > 0 ? "instock" : "outofstock",
             "weight" => implode(" ", $weights[0]),
             "weights" => array_unique($weights, SORT_REGULAR)
         ];

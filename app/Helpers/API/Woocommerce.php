@@ -66,6 +66,7 @@ class Woocommerce implements ChannelAPIInterface {
             if ($variant->manage_stock) {
                 $inventoryTotal += $variantData['inventory'];
             } else {
+                $inventoryTotal += ($variant->stock_status == "instock") ? 1 : 0;
                 $variantData['inventory_status'] = $variant->stock_status;
             }
 
@@ -87,7 +88,7 @@ class Woocommerce implements ChannelAPIInterface {
             "prices" => array_unique($prices, SORT_REGULAR),
             "price_range" => implode(" - ", $this->getPricesRange($prices)),
             "inventory_total" => $inventoryTotal,
-            "inventory_status" => $inventoryTotal > 0,
+            "inventory_status" => $inventoryTotal > 0 ? "instock" : "outofstock",
             "weight" => implode(" ", $weights),
             "weights" => array_unique($weights, SORT_REGULAR)
         ];

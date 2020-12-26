@@ -18,10 +18,13 @@ class StoreProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Store $store)
+    public function index(Request $request, Store $store)
     {
         //
         try {
+            // $this->authorize("list"); TODO Complete these
+            // $this->validate($request, []);
+
             return response([
                 "status" => "success",
                 "products" => $store->products()
