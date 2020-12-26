@@ -109,7 +109,7 @@ class Shopify implements ChannelAPIInterface {
      * @param array $options product options to send to the Shopify API
      * @return array the product objects
      */
-    private function loadProductData($params = []) {
+    public function loadProductData($params = []) {
         $jsonFile = resource_path("data/shopify.json");
         $productJsonData = json_decode(file_get_contents($jsonFile));
 
