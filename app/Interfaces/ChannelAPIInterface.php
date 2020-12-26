@@ -17,4 +17,6 @@ interface ChannelAPIInterface {
     public function product($id);
 
     public function convertToProduct($productData);
+
+    public function loadProductData();
 }
